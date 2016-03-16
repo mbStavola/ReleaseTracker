@@ -1,0 +1,1 @@
+web: java -cp "target/dependency/*":target/classes xyz.stavola.release_tracker.ReleaseTracker

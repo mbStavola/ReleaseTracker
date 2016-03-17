@@ -8,9 +8,9 @@ public class Release {
     public String tag_name;
     public String target_commitish;
     public String name;
-    public Boolean draft;
+    public boolean draft;
     public Author author;
-    public Boolean prerelease;
+    public boolean prerelease;
     public String created_at;
     public String published_at;
     public List<Asset> assets = new ArrayList<Asset>();

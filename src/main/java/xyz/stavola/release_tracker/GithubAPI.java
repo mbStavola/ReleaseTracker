@@ -2,6 +2,8 @@ package xyz.stavola.release_tracker;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -36,7 +38,7 @@ public class GithubAPI {
 
     private interface GithubService {
         @GET("repos/{org}/{repo}/releases")
-        List<Release> getReleases(@Path("org") String org, @Path("repo") String repo);
+        Call<List<Release>> getReleases(@Path("org") String org, @Path("repo") String repo);
     }
 
     //TODO: We need to handle a non 200 response
@@ -44,7 +46,10 @@ public class GithubAPI {
         List<Release> releases = Collections.emptyList();
 
         try{
-            service.getReleases(org, repo);
+            Response<List<Release>> response =
+                    service.getReleases(org, repo).execute();
+
+            releases = response.body();
         } catch (Exception e) {
             e.printStackTrace();
         }

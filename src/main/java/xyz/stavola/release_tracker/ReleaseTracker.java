@@ -29,8 +29,6 @@ public class ReleaseTracker {
 
         List<Release> releases = GithubAPI.get().getReleases(org, repo);
 
-
-        //This should render the model
         return new ModelAndView(releases, "releases.hbs");
     }
 }

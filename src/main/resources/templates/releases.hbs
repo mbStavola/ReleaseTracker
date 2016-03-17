@@ -27,12 +27,12 @@
 
     <hr>
 
-    {{#releases}}
+    {{#each releases}}
 
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{html_url}}"><h3>{{name}}</h3></a>
+                    <a href="{{url}}"><h3>{{name}}</h3></a>
                 </div>
                 <div class="panel-body">
                     <h4>Author:</h4>
@@ -43,32 +43,14 @@
                     <br><br>
 
                     <h4>Details:</h4>
+                    {{#each assetTable}}
                         <table>
                             <tr>
-                                <td>Tag</td>
-                                <td>{{tag_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Target Commit</td>
-                                <td>{{target_commitish}}</td>
-                            </tr>
-                            <tr>
-                                <td>Is Draft</td>
-                                <td>{{draft}}</td>
-                            </tr>
-                            <tr>
-                                <td>Is Pre-Release</td>
-                                <td>{{prerelease}}</td>
-                            </tr>
-                            <tr>
-                                <td>Created</td>
-                                <td>{{created_at}}</td>
-                            </tr>
-                            <tr>
-                                <td>Updated</td>
-                                <td>{{updated_at}}</td>
+                                <td>{{@key}}</td>
+                                <td>{{this}}</td>
                             </tr>
                         </table>
+                    {{/each}}
 
                     <br><br>
 
@@ -89,7 +71,7 @@
                         <th>Download</th>
                     </thead>
 
-                    {{#assets}}
+                    {{#each assets}}
                         <tbody>
                             <td>
                                 <a href="{{uploader.html_url}}">
@@ -97,27 +79,21 @@
                                 </a>
                             </td>
 
-                            <td>{{name}}</td>
-                            <td>{{label}}</td>
+                            {{#each assetTable}}
+                                <td>{{this}}</td>
+                            {{/each}}
 
-                            <td>{{state}}</td>
-                            <td>{{size}}</td>
-
-                            <td>{{created_at}}</td>
-                            <td>{{updated_at}}</td>
-
-                            <td>{{download_count}}</td>
                             <td>
                                 <a href="{{browser_download_url}}">
                                     <img src="">
                                 </a>
                             </td>
                         </tbody>
-                    {{/assets}}
+                    {{/each}}
                 </div>
             </div>
         </div>
-    {{/releases}}
+    {{/each}}
 
     <div class="row">
         <div class="col-lg-12">

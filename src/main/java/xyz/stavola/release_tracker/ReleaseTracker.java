@@ -5,9 +5,8 @@ import spark.Request;
 import spark.Response;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-import xyz.stavola.release_tracker.model.Release;
-
-import java.util.List;
+import xyz.stavola.release_tracker.model.Wrapper;
+import xyz.stavola.release_tracker.model.transformed.Release;
 
 public class ReleaseTracker {
     public static void main(String[] args) {
@@ -27,8 +26,11 @@ public class ReleaseTracker {
         String org = request.params("org");
         String repo = request.params("repo");
 
-        List<Release> releases = GithubAPI.get().getReleases(org, repo);
+        Release[] releases = GithubAPI.get().getReleases(org, repo);
 
-        return new ModelAndView(releases, "releases.hbs");
+        Wrapper wrapper = new Wrapper();
+        wrapper.releases = releases;
+
+        return new ModelAndView(wrapper, "releases.hbs");
     }
 }

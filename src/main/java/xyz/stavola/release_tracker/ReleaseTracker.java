@@ -11,6 +11,10 @@ import java.util.List;
 
 public class ReleaseTracker {
     public static void main(String[] args) {
+        int portNumber = Integer.parseInt(System.getenv("PORT"));
+
+        Spark.port(portNumber);
+
         Spark.get("/", (request, response) -> {
             response.redirect("/mbStavola/ReleaseTracker");
             return null;
